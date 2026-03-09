@@ -26,7 +26,6 @@
               <p class="small" style="margin:8px 0 0">${escapeHtml(dateLine)}${e.district ? ' • ' + escapeHtml(e.district) : ''}</p>
               <p style="margin:10px 0 16px; line-height:1.6">${escapeHtml(e.description || '')}</p>
             </div>
-            <div class="cardBar"><span>Mer</span><span>→</span></div>
           </div>
         `;
       })
