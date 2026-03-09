@@ -32,9 +32,15 @@ const API = {
 
   // Venues
   listVenues(params = {}) {
-    const qs = new URLSearchParams(params);
+    const cleaned = Object.fromEntries(
+      Object.entries(params).filter(([, value]) => value !== undefined && value !== null && value !== '')
+    );
+    const qs = new URLSearchParams(cleaned);
     const url = qs.toString() ? `/api/venues?${qs}` : '/api/venues';
     return this.request(url, { method: 'GET', headers: {} });
+  },
+  listVenueMeta() {
+    return this.request('/api/venues/meta', { method: 'GET', headers: {} });
   },
   createVenue(payload) {
     return this.request('/api/venues', { method: 'POST', body: JSON.stringify(payload) });

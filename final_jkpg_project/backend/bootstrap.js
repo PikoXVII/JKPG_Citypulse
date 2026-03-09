@@ -6,7 +6,6 @@ const bcrypt = require('bcryptjs');
 const db = require('./db');
 const { migrate } = require('./migrate');
 
-const DEFAULT_VENUE_IMAGE = '/assets/venue-placeholder.svg';
 const DEFAULT_EVENT_IMAGES = ['/assets/event-1.svg', '/assets/event-2.svg'];
 
 const manualVenues = [
@@ -17,8 +16,7 @@ const manualVenues = [
     address: 'Ågatan 12',
     description: 'Mysig fika vid vattnet med bakverk och kaffe.',
     website: 'https://example.com',
-    phone: '036-00 00 01',
-    image_url: DEFAULT_VENUE_IMAGE,
+    phone: '036-00 00 01'
   },
   {
     name: 'Spira Kulturhus',
@@ -27,8 +25,7 @@ const manualVenues = [
     address: 'Kulturvägen 1',
     description: 'Konserter, föreställningar och kultur året runt.',
     website: 'https://example.com',
-    phone: '036-00 00 03',
-    image_url: DEFAULT_VENUE_IMAGE,
+    phone: '036-00 00 03'
   },
   {
     name: 'Stadshotellet',
@@ -37,8 +34,7 @@ const manualVenues = [
     address: 'Stationsgatan 2',
     description: 'Bo centralt med gångavstånd till allt.',
     website: 'https://example.com',
-    phone: '036-00 00 04',
-    image_url: DEFAULT_VENUE_IMAGE,
+    phone: '036-00 00 04'
   },
   {
     name: 'City Galleria',
@@ -47,9 +43,8 @@ const manualVenues = [
     address: 'Storgatan 5',
     description: 'Butiker, kedjor och lokala favoriter i samma kvarter.',
     website: 'https://example.com',
-    phone: '036-00 00 02',
-    image_url: DEFAULT_VENUE_IMAGE,
-  },
+    phone: '036-00 00 02'
+  }
 ];
 
 const sampleEvents = [
@@ -59,7 +54,7 @@ const sampleEvents = [
     end_date: '2026-05-30',
     district: 'City',
     description: 'Digital och interaktiv stadsvandring genom centrala Jönköping.',
-    image_url: DEFAULT_EVENT_IMAGES[0],
+    image_url: DEFAULT_EVENT_IMAGES[0]
   },
   {
     title: 'Street Food Festival',
@@ -67,7 +62,7 @@ const sampleEvents = [
     end_date: '2026-05-24',
     district: 'Rådhusparken',
     description: 'Smaker från hela världen med mat, musik och kvällsliv.',
-    image_url: DEFAULT_EVENT_IMAGES[1],
+    image_url: DEFAULT_EVENT_IMAGES[1]
   },
   {
     title: 'Vår på Öster',
@@ -75,8 +70,8 @@ const sampleEvents = [
     end_date: '2026-04-18',
     district: 'Öster',
     description: 'Lokala aktörer på Öster bjuder in till kampanjer, aktiviteter och kvällsöppet.',
-    image_url: DEFAULT_EVENT_IMAGES[0],
-  },
+    image_url: DEFAULT_EVENT_IMAGES[0]
+  }
 ];
 
 function normalizeDistrict(district) {
@@ -130,8 +125,7 @@ function loadStoreVenues() {
       address: '',
       description: buildDescription(store),
       website: normalizeUrl(store.url),
-      phone: '',
-      image_url: DEFAULT_VENUE_IMAGE,
+      phone: ''
     });
   }
 
@@ -159,9 +153,9 @@ async function seedVenuesIfEmpty() {
   const venues = [...manualVenues, ...loadStoreVenues()];
   for (const v of venues) {
     await db.query(
-      `INSERT INTO venues (name, category, district, address, description, website, phone, image_url)
-       VALUES ($1,$2,$3,$4,$5,$6,$7,$8)`,
-      [v.name, v.category, v.district, v.address, v.description, v.website, v.phone, v.image_url]
+      `INSERT INTO venues (name, category, district, address, description, website, phone)
+       VALUES ($1,$2,$3,$4,$5,$6,$7)`,
+      [v.name, v.category, v.district, v.address, v.description, v.website, v.phone]
     );
   }
 
@@ -196,5 +190,5 @@ module.exports = {
   ensureAdmin,
   seedVenuesIfEmpty,
   seedEventsIfEmpty,
-  loadStoreVenues,
+  loadStoreVenues
 };

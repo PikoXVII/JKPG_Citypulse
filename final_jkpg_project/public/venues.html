@@ -34,36 +34,28 @@
   <main>
     <div class="container">
       <h1 class="h1">Venues</h1>
-      <p class="p">Översikt från databasen. Filtrera, sök och sortera (interaktiv design).</p>
+      <p class="p">Alla venues från databasen. Sök, filtrera på kategori och stadsdel, och sortera listan.</p>
 
       <form class="filters" data-filters>
-        <input name="q" placeholder="Sök…" autocomplete="off" />
+        <input name="q" placeholder="Sök namn, adress, kategori eller stadsdel…" autocomplete="off" />
         <select name="category">
           <option value="">Alla kategorier</option>
-          <option>Shoppa</option>
-          <option>Äta</option>
-          <option>Uppleva</option>
-          <option>Sova</option>
         </select>
         <select name="district">
           <option value="">Alla stadsdelar</option>
-          <option>Öster</option>
-          <option>Väster</option>
-          <option>Resecentrum</option>
-          <option>Spira</option>
-          <option>Rådhusparken</option>
-          <option>Högskolan</option>
-          <option>Atollen</option>
-          <option>Tändsticksområdet</option>
-          <option>City</option>
         </select>
         <select name="sort">
           <option value="">Standard</option>
           <option value="name">Namn A–Ö</option>
-          <option value="new">Nyast</option>
+          <option value="newest">Nyast</option>
+          <option value="oldest">Äldst</option>
+          <option value="category">Kategori</option>
+          <option value="district">Stadsdel</option>
         </select>
+        <button class="btn alt" type="button" data-reset-filters>Rensa filter</button>
       </form>
 
+      <p class="small" data-results-info style="margin-top:14px"></p>
       <div class="panel" data-venues></div>
     </div>
   </main>

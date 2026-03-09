@@ -51,17 +51,24 @@
 
   async function refreshVenues() {
     if (!venueList) return;
-    venueList.innerHTML = '<p class="p">Laddar…</p>';
+    venueList.innerHTML = '<p class="p">Laddar venues…</p>';
     try {
       const venues = await API.listVenues({ sort: 'name' });
+
+      if (!venues.length) {
+        venueList.innerHTML = '<p class="p">Inga venues hittades i databasen ännu.</p>';
+        return;
+      }
+
       venueList.innerHTML = venues
         .map(
           (v) => `
         <div class="panel" style="margin-top:12px">
-          <div style="display:flex; justify-content:space-between; gap:10px; align-items:flex-start">
+          <div style="display:flex; justify-content:space-between; gap:10px; align-items:flex-start; flex-wrap:wrap">
             <div>
               <div style="font-weight:900">${escapeHtml(v.name)}</div>
               <div class="small">${escapeHtml(v.category)} • ${escapeHtml(v.district)} • #${v.id}</div>
+              <div class="small">${escapeHtml(v.address || '')}${v.phone ? ' • ' + escapeHtml(v.phone) : ''}</div>
             </div>
             <div class="btnRow" style="margin-top:0">
               <button class="btn alt" data-edit="${v.id}">Redigera</button>
@@ -80,6 +87,7 @@
           try {
             await API.deleteVenue(id);
             await refreshVenues();
+            setMessage('Venue borttagen.');
           } catch (err) {
             setMessage(err.message);
           }
@@ -108,7 +116,6 @@
     venueForm.querySelector('input[name=address]').value = v.address || '';
     venueForm.querySelector('input[name=phone]').value = v.phone || '';
     venueForm.querySelector('input[name=website]').value = v.website || '';
-    venueForm.querySelector('input[name=image_url]').value = v.image_url || '';
     venueForm.querySelector('textarea[name=description]').value = v.description || '';
   }
 
@@ -129,8 +136,7 @@
         address: venueForm.querySelector('input[name=address]').value.trim(),
         phone: venueForm.querySelector('input[name=phone]').value.trim(),
         website: venueForm.querySelector('input[name=website]').value.trim(),
-        image_url: venueForm.querySelector('input[name=image_url]').value.trim(),
-        description: venueForm.querySelector('textarea[name=description]').value.trim(),
+        description: venueForm.querySelector('textarea[name=description]').value.trim()
       };
 
       const id = venueForm.querySelector('input[name=id]').value;
@@ -140,14 +146,17 @@
         else await API.createVenue(payload);
         clearVenueForm();
         await refreshVenues();
-        setMessage('Sparat!');
+        setMessage('Venue sparad!');
       } catch (err) {
         setMessage(err.message);
       }
     });
 
     const clearBtn = venueForm.querySelector('[data-clear]');
-    if (clearBtn) clearBtn.addEventListener('click', (e) => { e.preventDefault(); clearVenueForm(); });
+    if (clearBtn) clearBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      clearVenueForm();
+    });
   }
 
   if (eventForm) {
@@ -161,7 +170,7 @@
         end_date: eventForm.querySelector('input[name=end_date]').value || null,
         district: eventForm.querySelector('input[name=district]').value.trim(),
         image_url: eventForm.querySelector('input[name=image_url]').value.trim(),
-        description: eventForm.querySelector('textarea[name=description]').value.trim(),
+        description: eventForm.querySelector('textarea[name=description]').value.trim()
       };
 
       try {

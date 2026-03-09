@@ -12,14 +12,19 @@ const { signToken, requireAuth } = require('./backend/auth');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middlewares
+const ALLOWED_SORTS = {
+  default: 'ORDER BY id ASC',
+  name: 'ORDER BY name ASC',
+  newest: 'ORDER BY created_at DESC',
+  oldest: 'ORDER BY created_at ASC',
+  category: 'ORDER BY category ASC, name ASC',
+  district: 'ORDER BY district ASC, name ASC'
+};
+
 app.use(cors());
 app.use(express.json());
-
-// Static frontend
 app.use('/', express.static(path.join(__dirname, 'public')));
 
-// Health
 app.get('/api/health', async (req, res) => {
   try {
     await db.query('SELECT 1');
@@ -29,7 +34,6 @@ app.get('/api/health', async (req, res) => {
   }
 });
 
-// ---- Auth ----
 app.post('/api/auth/login', async (req, res) => {
   const { email, password } = req.body || {};
   if (!email || !password) return res.status(400).json({ message: 'Email and password required' });
@@ -45,37 +49,69 @@ app.post('/api/auth/login', async (req, res) => {
   res.json({ token, user: { id: user.id, email: user.email, role: user.role } });
 });
 
-// ---- Venues REST ----
-app.get('/api/venues', async (req, res) => {
-  const { q, category, district, sort } = req.query;
+app.get('/api/venues/meta', async (_req, res) => {
+  const [categoriesResult, districtsResult, countResult] = await Promise.all([
+    db.query(`SELECT DISTINCT category FROM venues WHERE category IS NOT NULL AND TRIM(category) <> '' ORDER BY category ASC`),
+    db.query(`SELECT DISTINCT district FROM venues WHERE district IS NOT NULL AND TRIM(district) <> '' ORDER BY district ASC`),
+    db.query('SELECT COUNT(*)::int AS total FROM venues')
+  ]);
 
-  // Small, safe filtering
+  res.json({
+    categories: categoriesResult.rows.map((row) => row.category),
+    districts: districtsResult.rows.map((row) => row.district),
+    total: countResult.rows[0].total
+  });
+});
+
+app.get('/api/venues', async (req, res) => {
+  const q = String(req.query.q || '').trim();
+  const category = String(req.query.category || '').trim();
+  const district = String(req.query.district || '').trim();
+  const sortKey = String(req.query.sort || '').trim().toLowerCase();
+  const sortSql = ALLOWED_SORTS[sortKey] || ALLOWED_SORTS.default;
+
   const values = [];
   const where = [];
 
   if (q) {
     values.push(`%${q}%`);
-    where.push(`(name ILIKE $${values.length} OR description ILIKE $${values.length})`);
+    where.push(`(
+      name ILIKE $${values.length}
+      OR description ILIKE $${values.length}
+      OR address ILIKE $${values.length}
+      OR district ILIKE $${values.length}
+      OR category ILIKE $${values.length}
+    )`);
   }
+
   if (category) {
     values.push(category);
     where.push(`category = $${values.length}`);
   }
+
   if (district) {
     values.push(district);
     where.push(`district = $${values.length}`);
   }
 
   const whereSql = where.length ? `WHERE ${where.join(' AND ')}` : '';
-  const sortSql = sort === 'name' ? 'ORDER BY name ASC' : sort === 'new' ? 'ORDER BY created_at DESC' : 'ORDER BY id ASC';
+  const sql = `
+    SELECT id, name, category, district, address, description, website, phone, created_at
+    FROM venues
+    ${whereSql}
+    ${sortSql}
+  `;
 
-  const { rows } = await db.query(`SELECT * FROM venues ${whereSql} ${sortSql}` , values);
+  const { rows } = await db.query(sql, values);
   res.json(rows);
 });
 
 app.get('/api/venues/:id', async (req, res) => {
   const id = Number(req.params.id);
-  const { rows } = await db.query('SELECT * FROM venues WHERE id=$1', [id]);
+  const { rows } = await db.query(
+    'SELECT id, name, category, district, address, description, website, phone, created_at FROM venues WHERE id=$1',
+    [id]
+  );
   const venue = rows[0];
   if (!venue) return res.status(404).json({ message: 'Not found' });
   res.json(venue);
@@ -88,10 +124,10 @@ app.post('/api/venues', requireAuth, async (req, res) => {
   }
 
   const { rows } = await db.query(
-    `INSERT INTO venues (name, category, district, address, description, website, phone, image_url)
-     VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
-     RETURNING *`,
-    [v.name, v.category, v.district, v.address || '', v.description || '', v.website || '', v.phone || '', v.image_url || '/assets/venue-placeholder.svg']
+    `INSERT INTO venues (name, category, district, address, description, website, phone)
+     VALUES ($1,$2,$3,$4,$5,$6,$7)
+     RETURNING id, name, category, district, address, description, website, phone, created_at`,
+    [v.name, v.category, v.district, v.address || '', v.description || '', v.website || '', v.phone || '']
   );
   res.status(201).json(rows[0]);
 });
@@ -111,16 +147,15 @@ app.put('/api/venues/:id', requireAuth, async (req, res) => {
     address: v.address ?? existing.address,
     description: v.description ?? existing.description,
     website: v.website ?? existing.website,
-    phone: v.phone ?? existing.phone,
-    image_url: v.image_url ?? existing.image_url
+    phone: v.phone ?? existing.phone
   };
 
   const { rows } = await db.query(
     `UPDATE venues
-     SET name=$1, category=$2, district=$3, address=$4, description=$5, website=$6, phone=$7, image_url=$8
-     WHERE id=$9
-     RETURNING *`,
-    [updated.name, updated.category, updated.district, updated.address, updated.description, updated.website, updated.phone, updated.image_url, id]
+     SET name=$1, category=$2, district=$3, address=$4, description=$5, website=$6, phone=$7
+     WHERE id=$8
+     RETURNING id, name, category, district, address, description, website, phone, created_at`,
+    [updated.name, updated.category, updated.district, updated.address, updated.description, updated.website, updated.phone, id]
   );
   res.json(rows[0]);
 });
@@ -132,7 +167,6 @@ app.delete('/api/venues/:id', requireAuth, async (req, res) => {
   res.json({ ok: true });
 });
 
-// ---- Events ----
 app.get('/api/events', async (req, res) => {
   const { rows } = await db.query('SELECT * FROM events ORDER BY start_date ASC');
   res.json(rows);
@@ -150,7 +184,6 @@ app.post('/api/events', requireAuth, async (req, res) => {
   res.status(201).json(rows[0]);
 });
 
-// Start (and ensure schema exists)
 (async () => {
   try {
     const boot = await bootstrap();

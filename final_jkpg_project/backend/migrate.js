@@ -19,7 +19,6 @@ async function migrate() {
       description TEXT,
       website TEXT,
       phone TEXT,
-      image_url TEXT,
       created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     );
 
@@ -33,6 +32,13 @@ async function migrate() {
       image_url TEXT,
       created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     );
+
+    ALTER TABLE venues DROP COLUMN IF EXISTS image_url;
+
+    CREATE INDEX IF NOT EXISTS idx_venues_name ON venues (name);
+    CREATE INDEX IF NOT EXISTS idx_venues_category ON venues (category);
+    CREATE INDEX IF NOT EXISTS idx_venues_district ON venues (district);
+    CREATE INDEX IF NOT EXISTS idx_events_start_date ON events (start_date);
   `);
 }
 

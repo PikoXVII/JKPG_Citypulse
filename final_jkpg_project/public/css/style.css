@@ -307,7 +307,7 @@ a {
 
 .venueRow {
   display: grid;
-  grid-template-columns: 160px 1fr;
+  grid-template-columns: 1fr;
   gap: 16px;
   border-top: 1px solid rgba(0, 0, 0, 0.12);
   padding: 16px 0;
@@ -357,6 +357,28 @@ a {
 .venueMeta p {
   margin: 8px 0 0;
   line-height: 1.6;
+}
+
+.venueMetaStack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.venueText {
+  line-height: 1.5;
+  margin: 0;
+  width: 100%;
+  max-width: none;
+  white-space: normal;
+}
+
+.venueWebsite {
+  display: block;
+  margin-top: 6px;
+  text-decoration: none;
+  font-weight: 500;
 }
 
 /* ADMIN */
