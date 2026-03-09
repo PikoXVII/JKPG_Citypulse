@@ -5,12 +5,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Stadsdelar – CityPulse</title>
   <link rel="stylesheet" href="/css/style.css" />
+  <style>
+    .cardTop img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .cardTop {
+      height: 300px;
+      position: relative;
+    }
+    .cardBar {
+      background: var(--accent3);
+      color: black;
+      text-align: center;
+      font-weight: 700;
+      padding: 8px 0;
+      font-size: 14px;
+    }
+    .grid.grid-4 .card {
+      height: auto;
+    }
+    .city-map img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain; /* zoomar ut så hela kartan syns */
+      display: block;
+    }
+    .city-map {
+      height: 420px;
+      border:2px solid var(--line);
+    }
+  </style>
 </head>
 <body>
 
 <header class="nav is-solid">
   <a class="brand" href="/">citypulse.</a>
-
   <nav class="menu" aria-label="Huvudmeny">
     <a href="/">Upptäck</a>
     <a href="/events.html">Evenemang</a>
@@ -18,7 +50,6 @@
     <a href="/info.html">Information</a>
     <a href="/admin.html">Admin</a>
   </nav>
-
   <button class="hamburger" data-hamburger aria-label="Öppna meny">☰</button>
 </header>
 
@@ -32,101 +63,68 @@
 
 <div class="spacer"></div>
 
-
 <section style="background:var(--accent2); color:black; padding:54px 0;">
   <div class="container">
     <h1 class="h1">Stadsdelar</h1>
-    <p class="p">
-      Utforska de olika områdena i Jönköping City.
-    </p>
+    <p class="p">Utforska de olika områdena i Jönköping City.</p>
   </div>
 </section>
 
-
 <main>
+  <div class="container">
 
-<div class="container">
+    <h2 class="h1">Karta över Jönköping City</h2>
+    <p class="p">Här ser du en enkel översikt över stadsdelarna i city.</p>
 
-<h2 class="h1">Karta över Jönköping City</h2>
+    <div class="panel city-map" style="margin-top:22px">
+      <img src="/assets/Karta_stadskaernan_9946c1b091.webp" alt="Karta över hela Jönköping City">
+    </div>
 
-<p class="p">
-Här ser du en enkel översikt över stadsdelarna i city. Klicka på en stadsdel
-för att se restauranger, caféer och andra platser i området.
-</p>
+    <div class="grid grid-4" style="margin-top:22px">
 
+      <div class="card">
+        <div class="cardTop"><img alt="Karta över Atollen" src="/assets/Atollen_sommar_1200x1200_7ef032ffa5.webp" /></div>
+        <div class="cardBar">Atollen</div>
+      </div>
 
-<div class="panel" style="margin-top:22px">
+      <div class="card">
+        <div class="cardTop"><img alt="Karta över Högskolan" src="/assets/högskolan.webp" /></div>
+        <div class="cardBar">Högskolan</div>
+      </div>
 
-<div style="height:420px; border:2px solid var(--line); background:linear-gradient(135deg,#f2f2f2,#ffffff); display:flex; align-items:center; justify-content:center">
+      <div class="card">
+        <div class="cardTop"><img alt="Karta över Resecentrum" src="/assets/resecentrum.webp" /></div>
+        <div class="cardBar">Resecentrum</div>
+      </div>
 
-<div style="text-align:center">
-<div style="font-weight:900; font-size:22px">Karta över City</div>
-<div class="small">Interaktiv karta kommer här</div>
-</div>
+      <div class="card">
+        <div class="cardTop"><img alt="Karta över Spira" src="/assets/Spira_rodd_1200x1200_c9a19009ea.webp" /></div>
+        <div class="cardBar">Spira</div>
+      </div>
 
-</div>
+      <div class="card">
+        <div class="cardTop"><img alt="Karta över Rådhusparken" src="/assets/Radhusparken_sommar_1200x1200_aa9e5ed33a.webp" /></div>
+        <div class="cardBar">Rådhusparken</div>
+      </div>
 
-</div>
+      <div class="card">
+        <div class="cardTop"><img alt="Karta över Tändsticksområdet" src="/assets/Taendsticksomradet2_c1dc57bd59.webp" /></div>
+        <div class="cardBar">Tändsticksområdet</div>
+      </div>
 
+      <div class="card">
+        <div class="cardTop"><img alt="Karta över Väster" src="/assets/Klostergatan_maj4_1200x1200_6325b7b3cf.webp" /></div>
+        <div class="cardBar">Väster</div>
+      </div>
 
+      <div class="card">
+        <div class="cardTop"><img alt="Karta över Öster" src="/assets/Oestra_storgatan_sommar_1200x1200_f7007438fd.webp" /></div>
+        <div class="cardBar">Öster</div>
+      </div>
 
-<div class="grid grid-4" style="margin-top:22px">
-
-
-<div class="card">
-<div class="cardTop"><img alt="" src="/assets/atollen.svg" /></div>
-<div class="cardBar"><a href="/venues.html?district=Atollen">Atollen</a><span>→</span></div>
-</div>
-
-
-<div class="card">
-<div class="cardTop"><img alt="" src="/assets/hogskolan.svg" /></div>
-<div class="cardBar"><a href="/venues.html?district=Högskolan">Högskolan</a><span>→</span></div>
-</div>
-
-
-<div class="card">
-<div class="cardTop"><img alt="" src="/assets/stationen.svg" /></div>
-<div class="cardBar"><a href="/venues.html?district=Resecentrum">Resecentrum</a><span>→</span></div>
-</div>
-
-
-<div class="card">
-<div class="cardTop"><img alt="" src="/assets/spira.svg" /></div>
-<div class="cardBar"><a href="/venues.html?district=Spira">Spira</a><span>→</span></div>
-</div>
-
-
-<div class="card">
-<div class="cardTop"><img alt="" src="/assets/radhusparken.svg" /></div>
-<div class="cardBar"><a href="/venues.html?district=Rådhusparken">Rådhusparken</a><span>→</span></div>
-</div>
-
-
-<div class="card">
-<div class="cardTop"><img alt="" src="/assets/tandsticksomradet.svg" /></div>
-<div class="cardBar"><a href="/venues.html?district=Tändsticksområdet">Tändsticksområdet</a><span>→</span></div>
-</div>
-
-
-<div class="card">
-<div class="cardTop"><img alt="" src="/assets/vaster.svg" /></div>
-<div class="cardBar"><a href="/venues.html?district=Väster">Väster</a><span>→</span></div>
-</div>
-
-
-<div class="card">
-<div class="cardTop"><img alt="" src="/assets/oster.svg" /></div>
-<div class="cardBar"><a href="/venues.html?district=Öster">Öster</a><span>→</span></div>
-</div>
-
-
-</div>
-
-</div>
-
+    </div>
+  </div>
 </main>
-
 
 <footer class="footer">
   <div class="footerBottom">
