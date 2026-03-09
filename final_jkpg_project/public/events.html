@@ -31,25 +31,29 @@
 
   <div class="spacer"></div>
 
-  <section class="sectionBand band-green">
+  <!-- Evenemangs-sektion med grön bakgrund -->
+  <section style="background:var(--accent3); color:black; padding:54px 0;">
     <div class="container">
       <h1 class="h1">Evenemang</h1>
-      <p class="p">Kommande events. Hämtas från databasen via REST API.</p>
+      <p class="p" style="font-size:18px; line-height:1.6;">
+        Det här händer i Jönköping den kommande tiden. Missa inte spännande
+        aktiviteter, konserter, marknader och kulturella evenemang runt om i staden.
+      </p>
     </div>
   </section>
 
   <main>
     <div class="container">
       <h2 style="margin:0; font-weight:900">Nästa evenemang</h2>
-      <p class="small">(Listan nedan uppdateras när du lägger till events i admin.)</p>
 
       <div class="grid grid-3" data-events style="margin-top:18px"></div>
 
       <div class="panel" style="margin-top:22px; background:var(--accent); border:none">
         <div style="padding:18px 16px">
-          <div style="font-weight:900; font-size:20px">Vill du synas här?</div>
-          <p class="small">Lägg till nya events i admin och se dem dyka upp direkt.</p>
-          <a class="btn alt" href="/admin.html" style="display:inline-block; margin-top:8px">Kontakta oss →</a>
+          <div style="font-weight:900; font-size:20px">Har du frågor?</div>
+          <a class="btn alt" href="mailto:info@jkpgcity.se" style="display:inline-block; margin-top:8px">
+            Kontakta oss →
+          </a>
         </div>
       </div>
     </div>
