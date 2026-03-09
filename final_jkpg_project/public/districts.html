@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Stadsdelar – CityPulse</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <header class="nav" style="color:white; background:rgba(0,0,0,.15)">
+    <a class="brand" href="/">citypulse.</a>
+
+    <nav class="menu" aria-label="Huvudmeny">
+      <a href="/">Upptäck</a>
+      <a href="/events.html">Evenemang</a>
+      <a class="active" href="/districts.html">Stadsdelar</a>
+      <a href="/info.html">Information</a>
+      <a href="/admin.html">Admin</a>
+    </nav>
+
+    <button class="hamburger" data-hamburger aria-label="Öppna meny">☰</button>
+  </header>
+
+  <div class="mobilePanel" data-mobile-panel>
+    <a href="/">Upptäck</a>
+    <a href="/events.html">Evenemang</a>
+    <a href="/districts.html">Stadsdelar</a>
+    <a href="/info.html">Information</a>
+    <a href="/admin.html">Admin</a>
+  </div>
+
+  <section class="hero" style="min-height:54vh">
+    <div class="heroInner">
+      <h1 class="heroBig" style="opacity:.35">Stadsdelar</h1>
+      <h2 class="heroTitle">Stadsdelar i City</h2>
+      <p class="heroText">En enkel översikt (klicka för att filtrera venues per stadsdel).</p>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marqueeTrack">
+      <span>ATOLLEN</span><span>HÖGSKOLAN</span><span>RESECENTRUM</span><span>SPIRA</span><span>RÅDHUSPARKEN</span><span>TÄNDSTICKSOMRÅDET</span><span>VÄSTER</span><span>ÖSTER</span>
+      <span>ATOLLEN</span><span>HÖGSKOLAN</span><span>RESECENTRUM</span><span>SPIRA</span><span>RÅDHUSPARKEN</span><span>TÄNDSTICKSOMRÅDET</span><span>VÄSTER</span><span>ÖSTER</span>
+    </div>
+  </div>
+
+  <main>
+    <div class="container">
+      <h2 class="h1">Stadsdelar i City</h2>
+      <p class="p">Kartan är en enkel illustration (inte originalmaterial). Under hittar du kort för varje stadsdel.</p>
+
+      <div class="panel" style="margin-top:22px">
+        <div style="height:420px; border:2px solid var(--line); background:linear-gradient(135deg,#f2f2f2,#ffffff); display:flex; align-items:center; justify-content:center">
+          <div style="text-align:center">
+            <div style="font-weight:900; font-size:22px">Karta över City</div>
+            <div class="small">(placeholder)</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-4" style="margin-top:18px">
+        <div class="card">
+          <div class="cardTop"><img alt="" src="/assets/atollen.svg" /></div>
+          <div class="cardBar"><a href="/venues.html?district=Atollen">Atollen</a><span>→</span></div>
+        </div>
+        <div class="card">
+          <div class="cardTop"><img alt="" src="/assets/hogskolan.svg" /></div>
+          <div class="cardBar"><a href="/venues.html?district=Högskolan">Högskolan</a><span>→</span></div>
+        </div>
+        <div class="card">
+          <div class="cardTop"><img alt="" src="/assets/stationen.svg" /></div>
+          <div class="cardBar"><a href="/venues.html?district=Resecentrum">Resecentrum</a><span>→</span></div>
+        </div>
+        <div class="card">
+          <div class="cardTop"><img alt="" src="/assets/spira.svg" /></div>
+          <div class="cardBar"><a href="/venues.html?district=Spira">Spira</a><span>→</span></div>
+        </div>
+        <div class="card">
+          <div class="cardTop"><img alt="" src="/assets/radhusparken.svg" /></div>
+          <div class="cardBar"><a href="/venues.html?district=Rådhusparken">Rådhusparken</a><span>→</span></div>
+        </div>
+        <div class="card">
+          <div class="cardTop"><img alt="" src="/assets/tandsticksomradet.svg" /></div>
+          <div class="cardBar"><a href="/venues.html?district=Tändsticksområdet">Tändsticksområdet</a><span>→</span></div>
+        </div>
+        <div class="card">
+          <div class="cardTop"><img alt="" src="/assets/vaster.svg" /></div>
+          <div class="cardBar"><a href="/venues.html?district=Väster">Väster</a><span>→</span></div>
+        </div>
+        <div class="card">
+          <div class="cardTop"><img alt="" src="/assets/oster.svg" /></div>
+          <div class="cardBar"><a href="/venues.html?district=Öster">Öster</a><span>→</span></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footerBottom">
+      <div>© <span data-year></span> CityPulse</div>
+      <div><a href="/">Till startsidan</a></div>
+    </div>
+  </footer>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>

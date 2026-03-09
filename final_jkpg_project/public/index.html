@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CityPulse</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <header class="nav" style="color:white">
+    <a class="brand" href="/">citypulse.</a>
+
+    <nav class="menu" aria-label="Huvudmeny">
+      <a class="active" href="/">Upptäck</a>
+      <a href="/events.html">Evenemang</a>
+      <a href="/districts.html">Stadsdelar</a>
+      <a href="/info.html">Information</a>
+      <a href="/admin.html">Admin</a>
+    </nav>
+
+    <button class="hamburger" data-hamburger aria-label="Öppna meny">☰</button>
+  </header>
+
+  <div class="mobilePanel" data-mobile-panel>
+    <a href="/">Upptäck</a>
+    <a href="/events.html">Evenemang</a>
+    <a href="/districts.html">Stadsdelar</a>
+    <a href="/info.html">Information</a>
+    <a href="/admin.html">Admin</a>
+  </div>
+
+  <section class="hero">
+    <div class="heroInner">
+      <h1 class="heroBig">citypulse.</h1>
+      <h2 class="heroTitle">Välkommen till din stad</h2>
+      <p class="heroText">Upptäck venues, kommande evenemang och praktisk information. Allt innehåll laddas från vår databas via ett REST API.</p>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marqueeTrack">
+      <span>STATIONEN</span><span>RÅDHUSPARKEN</span><span>HÖGSKOLAN</span><span>VÄSTER</span><span>ATOLLEN</span><span>ÖSTER</span><span>SPIRA</span><span>TÄNDSTICKSOMRÅDET</span>
+      <span>STATIONEN</span><span>RÅDHUSPARKEN</span><span>HÖGSKOLAN</span><span>VÄSTER</span><span>ATOLLEN</span><span>ÖSTER</span><span>SPIRA</span><span>TÄNDSTICKSOMRÅDET</span>
+    </div>
+  </div>
+
+  <main>
+    <div class="container">
+      <h2 class="h1">Upptäck</h2>
+      <p class="p">Snabba ingångar – klicka för att filtrera venues direkt.</p>
+
+      <div class="grid grid-4" style="margin-top:22px">
+        <div class="card">
+          <div class="cardBody">
+            <div class="cardTitle">Shoppa</div>
+            <p class="cardDesc">Butiker, kedjor och lokala favoriter.</p>
+          </div>
+          <div class="cardBar"><a href="/venues.html?category=Shoppa">Utforska</a><span>→</span></div>
+        </div>
+        <div class="card">
+          <div class="cardBody">
+            <div class="cardTitle">Äta</div>
+            <p class="cardDesc">Restauranger, caféer och smakupplevelser.</p>
+          </div>
+          <div class="cardBar" style="background:var(--accent2)"><a href="/venues.html?category=Äta">Utforska</a><span>→</span></div>
+        </div>
+        <div class="card">
+          <div class="cardBody">
+            <div class="cardTitle">Uppleva</div>
+            <p class="cardDesc">Kultur, aktiviteter och nya minnen.</p>
+          </div>
+          <div class="cardBar"><a href="/venues.html?category=Uppleva">Utforska</a><span>→</span></div>
+        </div>
+        <div class="card">
+          <div class="cardBody">
+            <div class="cardTitle">Hitta</div>
+            <p class="cardDesc">Praktisk info och vägar till centrum.</p>
+          </div>
+          <div class="cardBar"><a href="/info.html">Läs mer</a><span>→</span></div>
+        </div>
+      </div>
+
+      <div style="margin-top:36px" class="panel">
+        <div style="display:flex; justify-content:space-between; gap:10px; align-items:baseline; flex-wrap:wrap">
+          <h3 style="margin:0; font-weight:900">Senaste venues</h3>
+          <a class="small" href="/venues.html">Visa alla →</a>
+        </div>
+        <div data-venue-list style="margin-top:14px"></div>
+      </div>
+
+      <div style="margin-top:26px" class="panel">
+        <h3 style="margin:0; font-weight:900">För betyg 4–5</h3>
+        <p class="p" style="margin-top:10px">Gå till <a href="/admin.html">Admin</a> för att logga in och skapa, redigera eller ta bort venues (CRUD). Du kan även lägga till events.</p>
+        <p class="small">Standard: admin@citypulse.local / admin123 (kan ändras i docker-compose.yml eller .env)</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footerTop">
+      <div class="container" style="padding:0 18px">
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:18px; flex-wrap:wrap">
+          <div style="font-weight:900; font-size:18px">Följ oss i våra sociala kanaler</div>
+          <div class="social" aria-label="Sociala länkar">
+            <a href="#" aria-label="Facebook">f</a>
+            <a href="#" aria-label="Instagram">i</a>
+            <a href="#" aria-label="LinkedIn">in</a>
+            <a href="#" aria-label="TikTok">t</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footerGrid">
+      <div>
+        <div class="brand" style="font-size:36px">citypulse.</div>
+        <p class="small">Projektwebb (kurs) – exempeldata.</p>
+        <p class="small">Kontakt: info@citypulse.local</p>
+      </div>
+
+      <div>
+        <h4>Upptäck</h4>
+        <a href="/venues.html?category=Shoppa">Shoppa</a>
+        <a href="/venues.html?category=Äta">Äta</a>
+        <a href="/venues.html?category=Uppleva">Uppleva</a>
+        <a href="/venues.html?category=Sova">Sova</a>
+        <a href="/districts.html">Stadsdelar</a>
+      </div>
+
+      <div>
+        <h4>Information</h4>
+        <a href="/info.html#oppettider">Öppettider</a>
+        <a href="/info.html#parkering">Parkering</a>
+        <a href="/info.html#transport">Transport</a>
+        <a href="/admin.html">Admin</a>
+      </div>
+    </div>
+
+    <div class="footerBottom">
+      <div>© <span data-year></span> CityPulse</div>
+      <div><a href="#">Integritetspolicy</a></div>
+    </div>
+  </footer>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/pages/home.js"></script>
+</body>
+</html>

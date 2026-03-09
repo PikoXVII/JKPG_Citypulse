@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Venues – CityPulse</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <header class="nav is-solid">
+    <a class="brand" href="/">citypulse.</a>
+
+    <nav class="menu" aria-label="Huvudmeny">
+      <a href="/">Upptäck</a>
+      <a href="/events.html">Evenemang</a>
+      <a href="/districts.html">Stadsdelar</a>
+      <a href="/info.html">Information</a>
+      <a href="/admin.html">Admin</a>
+    </nav>
+
+    <button class="hamburger" data-hamburger aria-label="Öppna meny">☰</button>
+  </header>
+
+  <div class="mobilePanel" data-mobile-panel>
+    <a href="/">Upptäck</a>
+    <a href="/events.html">Evenemang</a>
+    <a href="/districts.html">Stadsdelar</a>
+    <a href="/info.html">Information</a>
+    <a href="/admin.html">Admin</a>
+  </div>
+
+  <div class="spacer"></div>
+
+  <main>
+    <div class="container">
+      <h1 class="h1">Venues</h1>
+      <p class="p">Översikt från databasen. Filtrera, sök och sortera (interaktiv design).</p>
+
+      <form class="filters" data-filters>
+        <input name="q" placeholder="Sök…" autocomplete="off" />
+        <select name="category">
+          <option value="">Alla kategorier</option>
+          <option>Shoppa</option>
+          <option>Äta</option>
+          <option>Uppleva</option>
+          <option>Sova</option>
+        </select>
+        <select name="district">
+          <option value="">Alla stadsdelar</option>
+          <option>Öster</option>
+          <option>Väster</option>
+          <option>Resecentrum</option>
+          <option>Spira</option>
+          <option>Rådhusparken</option>
+          <option>Högskolan</option>
+          <option>Atollen</option>
+          <option>Tändsticksområdet</option>
+          <option>City</option>
+        </select>
+        <select name="sort">
+          <option value="">Standard</option>
+          <option value="name">Namn A–Ö</option>
+          <option value="new">Nyast</option>
+        </select>
+      </form>
+
+      <div class="panel" data-venues></div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footerBottom">
+      <div>© <span data-year></span> CityPulse</div>
+      <div><a href="/">Till startsidan</a></div>
+    </div>
+  </footer>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/pages/venues.js"></script>
+</body>
+</html>

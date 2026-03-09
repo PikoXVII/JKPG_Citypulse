@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Information – CityPulse</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <header class="nav is-solid">
+    <a class="brand" href="/">citypulse.</a>
+
+    <nav class="menu" aria-label="Huvudmeny">
+      <a href="/">Upptäck</a>
+      <a href="/events.html">Evenemang</a>
+      <a href="/districts.html">Stadsdelar</a>
+      <a class="active" href="/info.html">Information</a>
+      <a href="/admin.html">Admin</a>
+    </nav>
+
+    <button class="hamburger" data-hamburger aria-label="Öppna meny">☰</button>
+  </header>
+
+  <div class="mobilePanel" data-mobile-panel>
+    <a href="/">Upptäck</a>
+    <a href="/events.html">Evenemang</a>
+    <a href="/districts.html">Stadsdelar</a>
+    <a href="/info.html">Information</a>
+    <a href="/admin.html">Admin</a>
+  </div>
+
+  <div class="spacer"></div>
+
+  <section class="sectionBand band-pink">
+    <div class="container">
+      <h1 class="h1">Information</h1>
+      <p class="p">Öppettider, parkering, transport och annat praktiskt.</p>
+    </div>
+  </section>
+
+  <main>
+    <div class="container">
+      <div class="grid" style="grid-template-columns:repeat(5,1fr); gap:0; border:2px solid var(--line)">
+        <div class="card" style="border:none; border-right:2px solid var(--line)">
+          <div class="cardBody">
+            <div class="cardTitle">Faciliteter</div>
+            <p class="cardDesc">Toaletter, skötrum och annat.</p>
+          </div>
+        </div>
+        <div class="card" style="border:none; border-right:2px solid var(--line)">
+          <div class="cardBody">
+            <div class="cardTitle" id="parkering">Parkering</div>
+            <p class="cardDesc">P-hus och parkering på gatan.</p>
+          </div>
+        </div>
+        <div class="card" style="border:none; border-right:2px solid var(--line)">
+          <div class="cardBody">
+            <div class="cardTitle" id="transport">Transport</div>
+            <p class="cardDesc">Tåg, buss, cykel och till fots.</p>
+          </div>
+        </div>
+        <div class="card" style="border:none; border-right:2px solid var(--line)">
+          <div class="cardBody">
+            <div class="cardTitle" id="oppettider">Öppettider</div>
+            <p class="cardDesc">Rekommenderade öppettider.</p>
+          </div>
+        </div>
+        <div class="card" style="border:none">
+          <div class="cardBody">
+            <div class="cardTitle">Shoppingkort</div>
+            <p class="cardDesc">Presentkort för hela city.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:22px; background:var(--black); color:var(--white); padding:22px;">
+        <h2 style="margin:0; font-weight:900">Upptäck City</h2>
+
+        <div style="margin-top:16px" class="panel">
+          <div data-accordion-item>
+            <button class="btn alt" type="button" style="width:100%; display:flex; justify-content:space-between; align-items:center">
+              <span>Parkering</span><span>→</span>
+            </button>
+            <div data-body style="display:none; padding:12px 0" class="small">
+              Tips: använd p-hus nära centrum, eller parkera i utkanten och promenera.
+            </div>
+          </div>
+
+          <div data-accordion-item>
+            <button class="btn alt" type="button" style="width:100%; display:flex; justify-content:space-between; align-items:center; margin-top:10px">
+              <span>Öppettider</span><span>→</span>
+            </button>
+            <div data-body style="display:none; padding:12px 0" class="small">
+              Rekommenderade öppettider: vardagar 10–18, lördag 10–15 (varierar per butik).
+            </div>
+          </div>
+
+          <div data-accordion-item>
+            <button class="btn alt" type="button" style="width:100%; display:flex; justify-content:space-between; align-items:center; margin-top:10px">
+              <span>Transport till city</span><span>→</span>
+            </button>
+            <div data-body style="display:none; padding:12px 0" class="small">
+              Res med tåg/buss till resecentrum, eller ta cykel/elscooter sista biten.
+            </div>
+          </div>
+
+          <div data-accordion-item>
+            <button class="btn alt" type="button" style="width:100%; display:flex; justify-content:space-between; align-items:center; margin-top:10px">
+              <span>Faciliteter</span><span>→</span>
+            </button>
+            <div data-body style="display:none; padding:12px 0" class="small">
+              Offentliga toaletter finns vid större knutpunkter. Skötrum finns i vissa gallerior.
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footerBottom">
+      <div>© <span data-year></span> CityPulse</div>
+      <div><a href="/">Till startsidan</a></div>
+    </div>
+  </footer>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/pages/info.js"></script>
+</body>
+</html>
